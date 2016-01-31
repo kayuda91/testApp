@@ -1,0 +1,26 @@
+$font: georgia, serif;
+$fontSize: 18px;
+.social-links .top-20 {
+  a {
+    margin-left: 10px;
+  }
+
+  span {
+    margin-left: 10px;
+  }
+}
+
+.blog-item-content {
+  padding: 25px;
+  p {
+    font-family: $font;
+    font-size: $fontSize;
+  }
+}
+
+.blog-list {
+  p {
+    font-family: $font;
+    font-size: $fontSize;
+  }
+}

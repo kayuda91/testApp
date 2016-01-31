@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="testApp:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/testApp_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="testApp/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="testApp" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="httpclient-4.5.1" />
+          <element id="library" level="project" name="httpcore-4.4.3" />
+          <element id="library" level="project" name="commons-logging-1.2" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
