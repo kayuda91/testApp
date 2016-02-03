@@ -6,6 +6,8 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.Objects" %>
+<%@ page import="http.DBConnection" %>
+<%@ page import="java.sql.Connection" %>
 <%--
   Created by IntelliJ IDEA.
   User: kayud
@@ -15,25 +17,122 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
-  <head>
-      <meta charset="utf-8">
-      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-      <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-
-      <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-      <script type="text/javascript" src="js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="js/script.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
     <title>Title</title>
-  </head>
-  <body>
-  <form action="" method="post" id="getInfo">
-      <input type="text" name="username">
-      <input type="submit" value="Get">
-  </form>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="header-top ">
+                    <div class="header-info ">
+                        <span class="bold">+7 812 677-01-98</span>
+                        <span class="italic">Бесплатная доставка по России и Миру</span>
+                    </div>
+                    <div class="search text-center">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <button type="button" class="pull-left"><img src="images/rectangle-404@2x.png"></button>
+                                <input type="text" class="pull-left" placeholder="Поиск">
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class=" pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">О бренде</a></li>
+                            <li><a href="#">Франчайзинг</a></li>
+                            <li><a href="#">Блог</a></li>
+                            <li><a href="#">Инста-фото</a></li>
+                            <li><a href="#">Контакты</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="main_menu header-middle text-center">
+                    <div class="col-md-12">
+                        <div class="logo col-md-12">
+                            <img src="images/logo-rafinad@2x.png" class="center-block">
+                        </div>
+                        <div class="clearfix"></div>
+                        <nav class="text-center navbar navbar-default">
+                            <div class="menu">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="#">Каталог</a></li>
+                                    <li><a href="#">Распродажа</a></li>
+                                    <li><a href="#">Коллекция «Онлайн»</a></li>
+                                    <li><a href="#">Косметика</a></li>
+                                    <li><a href="#">Обувь</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="container text-center">
+        <div class="main_banner">
+            <span class="big">Подберём платье по вашему<br>профилю в соцсети</span>
+            <div class="clearfix"></div>
+            <span><br>Для того, чтобы вам было проще определиться с выбором платья, мы разработали<br>
+интеллектуальную систему подбора. На основе анализа вашего профиля в одной из соцсетей,<br>
+она предложит вам несколько наиболее подходящих вариантов.</span>
+            <div class="clearfix"></div>
+            <div class="main-form">
+                <span>Вставьте ссылку</span>
+                <form class="form-inline" id="main-form">
+                    <div class="form-group">
+                        <input type="text" name="username" id="instalogin" placeholder="https://www.instagram.com/{ваш_аккаунт}">
+                        <button type="submit" class="" id="submit" data-loading-text="Расчет...">Найти платье</button>
+                    </div>
+                </form>
+                <span>или выберите соцсеть</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="social_icons">
+                <img src="images/facebook@2x.png">
+                <img src="images/instagram@2x.png">
+                <img src="images/vk@2x.png">
+                <img src="images/ok@2x.png">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="content">
+            <span>Вот, что нам удалось найти для вас</span>
+            <div class="select-group">
+
+                <select>
+                    <option>Любой повод</option>
+                </select>
+
+                <select>
+                    <option>Все цвета</option>
+                </select>
+
+                <select>
+                    <option>Все сезоны</option>
+                </select>
+
+            </div>
   <%
       String acc = "";
-      if (request.getParameter("username")!=null ) {
+      if (request.getParameter("username")!=null && !Objects.equals(request.getParameter("username"), "") && request.getParameter("getinfo")== null && request.getParameter("code")==null) {
           MyHttpURLConnection http = new MyHttpURLConnection();
           http.getConfig(application.getRealPath("/") + "config.json");
           //System.out.println("REQUEST = " + request.getParameter("username"));
@@ -45,7 +144,7 @@
           if (session.getAttribute("access_token")==null) {
 
               try {
-
+                  session.setAttribute("user", request.getParameter("username"));
                   //String resp = http.sendGet(request.getParameter("username"));
                   //out.print(resp);
                   String site = "https://api.instagram.com/oauth/authorize/?client_id=" + http.CLIENT_ID +
@@ -83,21 +182,36 @@
                       int followCount = counts.getInt("follows"); //на сколько подписан
                       int followersCount = counts.getInt("followed_by"); //фоловеры
                       //int posts = counts.getInt("media"); //посты
-                      out.println("Followers => " + followersCount);
+                      /*out.println("Followers => " + followersCount);
                       out.println("Followed by => " + followCount);
                       out.println("Likes => " + likesCount);
-                      out.println("Comments => " + commentsCount + "<br>");
+                      out.println("Comments => " + commentsCount + "<br>");*/
                       /*for(String item : comments){
                           out.println(item + "<br>");
                       }*/
 
                       double scores = http.calcScores(followersCount, followCount, likesCount);
-                      out.println(String.format("%.1f",scores) + "<br>");
+                      out.println("<span>Скоринг — " + String.format("%.1f",scores) + "</span><br>");
                       Map<String, Integer> map = http.getWordsCount(comments);
                       Set<Map.Entry<String,Integer>> entrySet = map.entrySet();
+                      String text = "";
+                      out.print("<span>");
                       for (Map.Entry<String,Integer> item : entrySet){
                           out.print(item.getKey() + " - " + item.getValue() + "<br>");
+                          text += item.getKey() + " - " + item.getValue() + "<br>";
                       }
+                      out.print("</span>");
+                      System.out.println("USERNAME = " + request.getParameter("username"));
+                        try {
+                            DBConnection con = new DBConnection();
+                            Connection connection = con.getConnection();
+
+                            con.insertRow(connection, session.getAttribute("user").toString(), scores, text);
+                        }
+                        catch (Exception e){
+                            //e.printStackTrace();
+                            System.out.println(e.getMessage());
+                        }
                       //out.println("Basic => " + basicInfo + "<br>"+counts);
                   }
               }
@@ -132,20 +246,36 @@
                   int followCount = counts.getInt("follows"); //на сколько подписан
                   int followersCount = counts.getInt("followed_by"); //фоловеры
                   //int posts = counts.getInt("media"); //посты
-                  out.println("Followers => " + followersCount);
+                  /*out.println("Followers => " + followersCount);
                   out.println("Followed by => " + followCount);
                   out.println("Likes => " + likesCount);
-                  out.println("Comments => " + commentsCount + "<br>");
+                  out.println("Comments => " + commentsCount + "<br>");*/
                       /*for(String item : comments){
                           out.println(item + "<br>");
                       }*/
 
                   double scores = http.calcScores(followersCount, followCount, likesCount);
-                  out.println(String.format("%.1f",scores) + "<br>");
+                  out.println("<span>Скоринг — " + String.format("%.1f",scores) + "</span><br>");
                   Map<String, Integer> map = http.getWordsCount(comments);
                   Set<Map.Entry<String,Integer>> entrySet = map.entrySet();
+                  String text = "";
+                  out.print("<span>");
                   for (Map.Entry<String,Integer> item : entrySet){
                       out.print(item.getKey() + " - " + item.getValue() + "<br>");
+                      text += item.getKey() + " - " + item.getValue() + "\n";
+                  }
+                  out.print("</span>");
+                  System.out.println("USER = " + request.getParameter("user"));
+                  try {
+                      DBConnection con = new DBConnection();
+                      Connection connection = con.getConnection();
+
+                      con.insertRow(connection, session.getAttribute("user").toString(), scores, text);
+                  }
+                  catch (Exception e){
+                      //e.printStackTrace();
+                      //out.print(e.toString());
+                      System.out.println(e.getMessage());
                   }
                   //out.println("Basic => " + basicInfo + "<br>"+counts);
               }
@@ -182,5 +312,9 @@
           }
       }
   %>
-  </body>
+        </div>
+    </div>
+
+</main>
+</body>
 </html>

@@ -1,29 +1,66 @@
-@font-7: 10px;
+@font-7: 14px;
 @font-10: 20px;
 @font-24:48px;
 @top-header: 42px;
 @middle-header: 189px;
 @line-height: 40px;
+
+@font-face {
+  font-family: 'PTSerif';
+  src: url('../fonts/PTSerif.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PTSerif-Italic';
+  src: url('../fonts/PTSerif-Italic.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+.container {
+  width: 1440px;
+}
 .header-top {
   background: #f3f3f3;
   font-size: @font-7;
   min-height: @top-header;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  div {
+    float: left;
+  }
   span {
     line-height: @line-height;
+    letter-spacing: -0.5px;
+  }
+  .bold {
+    font-weight: bold;
+    color: #333333;
+    margin-right: 25px;
+    margin-left: 40px;
+  }
+  .italic {
+    font-style: italic;
+    color: #999999;
   }
   ul {
     li {
-      margin-right: 15px;
+      margin-right: 30px;
       a {
+        line-height: normal;
+        border-bottom: 1px solid rgba(0, 119, 204, 0.3);
+        margin-top: 12px;
         padding: 0;
-        line-height: @line-height;
       }
+    }
+    li:last-child {
+      margin-right: 35px;
     }
   }
 }
 
 .search {
   margin-top: @top-header/4;
+  margin-left: 115px;
   button {
     background: #f3f3f3;
     border: none;
@@ -32,25 +69,127 @@
     border: none;
     background: #f3f3f3;
     border-bottom: 1px solid rgba(153, 153, 153, 0.25);
+    width: 250px;
   }
 }
 
 .header-middle {
   min-height: @middle-header;
   img{
-    margin-top: @top-header/2;
+    margin-top: 18px;
   }
 }
 
 .main_banner {
-  background: url("/images/main-banner@2x.png") no-repeat;
+  background: url("../images/main-banner@2x.png") no-repeat;
   min-height: 798px;
   padding-top: 56px;
+  color: #fff;
   span {
     color: #fff;
     font-size: @font-10;
+    font-family: "PTSerif-Italic", Arial, sans-serif;
+    font-style: italic;
+    line-height: normal;
+    letter-spacing: normal;
   }
   .big {
     font-size: @font-24;
+    font-family: "PTSerif", Arial, sans-serif;
+    font-style: normal;
+
+  }
+}
+@main-form-height:50px;
+.main-form {
+  margin-top: 75px;
+  form {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    margin: 20px 20px 20px 210px;
+    #instalogin {
+      width: 617px;
+      height: @main-form-height;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      font-size: 18px;
+      padding-left: 14px;
+      border-radius: 3px;
+      font-style: italic;
+      color: #000;
+      ::-webkit-input-placeholder {color:rgba(153, 153, 153, 0.5);}
+      ::-moz-placeholder          {color:rgba(153, 153, 153, 0.5);}/* Firefox 19+ */
+      :-moz-placeholder           {color:rgba(153, 153, 153, 0.5);}/* Firefox 18- */
+      :-ms-input-placeholder      {color:rgba(153, 153, 153, 0.5);}
+
+    }
+    #submit {
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      height: @main-form-height;
+      margin-left: 15px;
+      border-radius: 3px;
+      width: 195px;
+    }
+  }
+}
+
+
+.nav.navbar-nav
+{
+  display: inline-block;
+  float: none;
+
+}
+
+.navbar-default {
+  border: none;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: none;
+  margin: 28px 0 0;
+  ul {
+    li {
+      margin-right: 47px;
+      a {
+        color:#0077cc !important;
+        border-bottom: 1px solid rgba(0, 119, 204, 0.3);
+        padding:0 0 0;
+      }
+    }
+    li:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.social_icons {
+  margin-top:25px;
+  img {
+    margin-right: 12px;
+  }
+}
+
+.content {
+  padding-top: 50px;
+  min-height: 300px;
+  span {
+    font-family: "PTSerif-Italic", Arial, sans-serif;
+    font-size: @font-10;
+    color: #333333;
+  }
+  .select-group {
+    color: #4a4a4a;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 40px;
+    select {
+      margin-right:45px;
+      width: 188px;
+      height: 25px;
+    }
+    select:last-child{
+      margin-right: 0;
+    }
   }
 }

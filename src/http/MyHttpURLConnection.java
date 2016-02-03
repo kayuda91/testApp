@@ -11,6 +11,21 @@ import java.util.*;
 /**
  * Created by kayud on 28.01.2016.
  *
+ *
+ * CREATE TABLE instaQueries
+ (
+ id integer NOT NULL DEFAULT nextval('instaQueries_id_seq'::regclass),
+ scores double precision,
+ recently_words text,
+ insta_login text,
+ CONSTRAINT id PRIMARY KEY (id)
+ )
+ WITH (
+ OIDS=FALSE
+ );
+ ALTER TABLE instaQueries
+ OWNER TO postgres;
+
  */
 public class MyHttpURLConnection {
 

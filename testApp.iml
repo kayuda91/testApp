@@ -23,7 +23,6 @@
     <orderEntry type="library" name="httpclient-4.5.1" level="project" />
     <orderEntry type="library" name="httpcore-4.4.3" level="project" />
     <orderEntry type="library" name="commons-logging-1.2" level="project" />
-    <orderEntry type="library" name="postgresql-9.4.1207" level="application" />
-    <orderEntry type="library" name="jooq-3.7.2" level="application" />
+    <orderEntry type="library" name="postgresql-9.4.1207" level="project" />
   </component>
 </module>
